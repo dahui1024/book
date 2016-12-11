@@ -8,13 +8,13 @@
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
 
-    <title>中场分享</title>
+    <title>Cover Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/static/css/cover.css" rel="stylesheet">
+    <link href="/static/css/grid.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -29,44 +29,44 @@
 
   <body>
 
-    <div class="site-wrapper">
+	<div class="container">
 
-      <div class="site-wrapper-inner">
+		<div class="page-header">
+			<h1>资源分享专区</h1>
+			<p class="lead">好看、好玩</p>
+		</div>
 
-        <div class="cover-container">
+		<div class="row">
+			<form role="form" action="image" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label class="radio-inline input-lg">
+						<input type="radio" name="type" id="type" value="image" checked="checked">图片
+					</label> 
+				</div>
+				<div class="form-group">
+					<label for="invitation_code">邀请码</label>
+					<input type="text" class="form-control input-lg" id="invitation_code" name="invitation_code" placeholder="邀请码：****" required="required">
+				</div>
+				<div class="form-group">
+					<label for="title">标题</label>
+					<input type="text" class="form-control input-lg" id="title" name="title" placeholder="键入标题" required="required">
+				</div>
+				<div class="form-group">
+					<label for="file">选择文件</label>
+					<input type="file" id="file" name="file" class="input-lg" required="required">
+					<p class="help-block">禁止上传违法图片、文档等.</p>
+				</div>
+				<div class="checkbox">
+					<label> <input type="checkbox"> Check me out</label>
+				</div>
+				<button type="submit" class="btn btn-danger btn-lg">上传</button>
+			</form>
+		</div>
 
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">中场分享</h3>
-              <ul class="nav masthead-nav">
-                <li class="active"><a href="/index.html">首页</a></li>
-                <li><a href="/images">图片</a></li>
-                <li><a href="/books">书籍</a></li>
-              </ul>
-            </div>
-          </div>
+	</div>
+	<!-- /container -->
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Learn more</a>
-            </p>
-          </div>
-
-          <div class="mastfoot">
-            <div class="inner">
-              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
