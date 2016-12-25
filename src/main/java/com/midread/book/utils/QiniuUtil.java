@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
@@ -14,12 +16,13 @@ import com.qiniu.storage.model.FileInfo;
 import com.qiniu.storage.model.FileListing;
 import com.qiniu.util.Auth;
 
+@Component
 public class QiniuUtil {
 	// 设置好账号的ACCESS_KEY和SECRET_KEY
-	String ACCESS_KEY = "QZYtTsqkeWpMzkJ3T33o3IybYbkiWFphMLJ40DUc";
-	String SECRET_KEY = "emLguAHwV5ugqSW-DUfC86YUXIOXHaBUf3OayO82";
+	static String ACCESS_KEY = "QZYtTsqkeWpMzkJ3T33o3IybYbkiWFphMLJ40DUc";
+	static String SECRET_KEY = "emLguAHwV5ugqSW-DUfC86YUXIOXHaBUf3OayO82";
 	// 要上传的空间
-	String bucketname = "midread";
+	static String bucketname = "midread";
 
 	// 密钥配置
 	Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
@@ -55,7 +58,7 @@ public class QiniuUtil {
 		}
 	}
 	
-	public List<String> list(String path){
+	public List<String> list(String prefix){
         BucketManager bucketManager = new BucketManager(auth,c);
         List<String> list = new ArrayList<String>();
 		try {
@@ -65,10 +68,11 @@ public class QiniuUtil {
 			// 参数三：marker 上一次获取文件列表时返回的 marker
 			// 参数四：limit 每次迭代的长度限制，最大1000，推荐值 100
 			// 参数五：delimiter 指定目录分隔符，列出所有公共前缀（模拟列出目录效果）。缺省值为空字符串
-			FileListing fileListing = bucketManager.listFiles(bucketname, "txt", null, 10, null);
+			FileListing fileListing = bucketManager.listFiles(bucketname, prefix, null, 10, null);
 			FileInfo[] items = fileListing.items;
 			for (FileInfo fileInfo : items) {
 				list.add(fileInfo.key);
+				System.out.println(fileInfo.key);
 			}
 		} catch (QiniuException e) {
 			// 捕获异常信息

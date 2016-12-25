@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
 
-    <title>Cover Template for Bootstrap</title>
+    <title>文件上传 | 中场分享</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -32,17 +32,16 @@
 	<div class="container">
 
 		<div class="page-header">
-			<h1>资源分享专区</h1>
-			<p class="lead">好看、好玩</p>
+			<h1>资源分享专区<small>好看、好玩</small></h1>
 		</div>
 
 		<div class="row">
-			<form role="form" action="image" method="post" enctype="multipart/form-data">
-				<div class="form-group">
+			<form role="form" action="upload" method="post" enctype="multipart/form-data">
+				<!-- <div class="form-group">
 					<label class="radio-inline input-lg">
 						<input type="radio" name="type" id="type" value="image" checked="checked">图片
 					</label> 
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label for="invitation_code">邀请码</label>
 					<input type="text" class="form-control input-lg" id="invitation_code" name="invitation_code" placeholder="邀请码：****" required="required">
@@ -52,13 +51,17 @@
 					<input type="text" class="form-control input-lg" id="title" name="title" placeholder="键入标题" required="required">
 				</div>
 				<div class="form-group">
+					<label for="title">想法</label>
+					<textarea class="form-control" rows="3" id="desc" name="desc" placeholder="有想法，就毫不吝啬的表达出来吧。"></textarea>
+				</div>
+				<div class="form-group">
 					<label for="file">选择文件</label>
 					<input type="file" id="file" name="file" class="input-lg" required="required">
-					<p class="help-block">禁止上传违法图片、文档等.</p>
+					<p class="help-block">目前只支持图片和TXT文档，禁止上传违法内容。</p>
 				</div>
-				<div class="checkbox">
+				<!-- <div class="checkbox">
 					<label> <input type="checkbox"> Check me out</label>
-				</div>
+				</div> -->
 				<button type="submit" class="btn btn-danger btn-lg">上传</button>
 			</form>
 		</div>

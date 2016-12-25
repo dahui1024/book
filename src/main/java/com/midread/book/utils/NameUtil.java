@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NameUtil {
-	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	
 	public static String image(String title){
 		

@@ -8,6 +8,7 @@ public class FileForm implements Serializable {
 	private static final long serialVersionUID = -2457547290959703993L;
 	private MultipartFile file;
 	private String title;
+	private String desc;
 	private String type;
 	private String invitation_code;
 
@@ -41,6 +42,14 @@ public class FileForm implements Serializable {
 
 	public void setInvitation_code(String invitation_code) {
 		this.invitation_code = invitation_code;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 }

@@ -1,5 +1,6 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,9 +29,7 @@
   </head>
 
   <body>
-
     <div class="site-wrapper">
-
       <div class="site-wrapper-inner">
 
         <div class="cover-container">
@@ -39,40 +38,32 @@
             <div class="inner">
               <h3 class="masthead-brand">中场分享</h3>
               <ul class="nav masthead-nav">
-                <li class="active"><a href="/index.html">首页</a></li>
-                <li><a href="/images">图片</a></li>
-                <li><a href="/txts">书籍</a></li>
+                <li class="active"><a href="/">首页</a></li>
+                <li><a href="/images">图集</a></li>
+                <li><a href="/txts">文集</a></li>
+                <li><a href="/input.html">去分享</a></li>
               </ul>
             </div>
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+            <h1 class="cover-heading">中场分享。</h1>
+            <p class="lead">留住经典，分享经典。</p>
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Learn more</a>
+				<a href="/txts" class="btn btn-lg btn-default">经典文集</a>
+				<a href="/images" class="btn btn-lg btn-default">经典图集</a>
             </p>
           </div>
 
           <div class="mastfoot">
             <div class="inner">
-              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+              <p>@2016 中场分享, Power by <a  href="mailto:dahui@midread.com">@dahui</a>.</p>
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="/static/js/docs.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+    <%@ include file="../../../html/js.html"%>
   </body>
 </html>
