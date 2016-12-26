@@ -49,7 +49,7 @@
 	<script type="text/javascript">
 		getTxt = function() {
 			$.ajax({
-				url : 'http://image.oss.bbcow.com/${txt.url }',
+				url : 'https://file.oss.bbcow.com/${txt.url }',
 				success : function(data) {
 					var arr = data.split("\n");
 					//data.replace(/[\n]/g,"<br/>")
