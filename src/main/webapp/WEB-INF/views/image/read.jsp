@@ -46,7 +46,7 @@
 		
 		<!--PC打分版-->
 		<div id="SOHUCS" sid="${txt.title }"></div>
-		<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+		<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
 		<script type="text/javascript">
 			window._config = { showScore: true };
 			window.changyan.api.config({
