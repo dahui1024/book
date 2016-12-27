@@ -42,6 +42,18 @@
 			</c:choose>
 		
 		</div>
+		
+		
+		<!--PC打分版-->
+		<div id="SOHUCS" sid="${txt.title }"></div>
+		<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+		<script type="text/javascript">
+			window._config = { showScore: true };
+			window.changyan.api.config({
+			appid: 'cysK7gU7o',
+			conf: 'prod_63d9ae711ffce9af708d8a3d607e4d8e'
+			});
+		</script>
 	</div>
 
 
