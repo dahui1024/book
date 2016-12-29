@@ -28,12 +28,12 @@
 				<div class="col-md-7"><h1>${txt.title }</h1></div>
 				<div class="col-md-1 text-center"><span class="label label-default">TXT</span></div>
 				<div class="col-md-2 text-center" >
-					<a href="/txts/${txt.id }/${txt.current_sn }/1" class="btn btn-default btn-sm" role="button">
+					<a href="/txts/${txt.id }/${txt.current_sn }" class="btn btn-default btn-sm" role="button">
 					<span class="glyphicon glyphicon-play"></span>在线阅读</a>
 				</div>
 				<div class="col-md-2 text-center">
-					<a href="/txts/${txt.id }/${txt.current_sn }" class="btn btn-default btn-sm" role="button">
-					<span class="glyphicon glyphicon-list"></span>目录</a>
+					<a href="http://image.oss.bbcow.com/${txt.url }?attname=" class="btn btn-default btn-sm" role="button">
+					<span class="glyphicon glyphicon-save"></span>下载</a>
 				</div>
 			</div>
 		</c:forEach>
