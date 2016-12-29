@@ -64,10 +64,23 @@
 				url : 'https://file.oss.bbcow.com/${txt.url }',
 				success : function(data) {
 					var arr = data.split("\n");
-					//data.replace(/[\n]/g,"<br/>")
+					var num = 1;
 					for(var i=0; i<arr.length;i++){
-						$("#content").append("<p class='lead'><font color='red'>"+(i+1)+"</font>"+arr[i]+"</p>");
+						if(arr[i] != ""){
+							$("#content").append("<p class='lead' id='"+i+"'><font color='red'>"+num+"</font>"+arr[i]+"</p>");
+							num++;
+						}
 					}
+					
+					$("p").mouseover(function() {
+						$(this).css("font-size","32px");
+						$(this).css("color","#262626");
+						
+						var id = $(this).attr("id");
+					});
+					$("p").mouseleave(function() {
+						$(this).removeAttr("style");
+					});
 				}
 			});
 		}

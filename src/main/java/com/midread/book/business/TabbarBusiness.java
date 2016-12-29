@@ -35,6 +35,6 @@ public class TabbarBusiness {
 	}
 	public TxtVo getTxt(String id, int sn){
 		
-		return stringTemplate.getObject("txts:"+id+":"+sn, TxtVo.class);
+		return  stringTemplate.getObject("txts:"+id+":"+sn, TxtVo.class);
 	}
 }
