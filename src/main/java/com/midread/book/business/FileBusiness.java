@@ -28,7 +28,6 @@ public class FileBusiness {
 	
 	public String upload(FileForm form){
 		if (StringUtils.equals(CommonConstant.INVATION_CODE, form.getInvitation_code())) {
-			QiniuUtil qu = new QiniuUtil();
 			try {
 				String name = StringUtils.trim(form.getFile().getOriginalFilename()).toLowerCase();
 				if (name.endsWith("jpg") || name.endsWith("png") || name.endsWith("gif") || name.endsWith("jpeg")) {
@@ -38,7 +37,7 @@ public class FileBusiness {
 					vo.setId(MD5Util.digest(vo.getUrl()));
 					vo.setUpload_date(new Date());
 					vo.setDesc(form.getDesc());
-					qu.upload(vo.getUrl(), form.getFile().getBytes());
+					qiniuUtil.upload(vo.getUrl(), form.getFile().getBytes());
 					
 					stringTemplate.leftPush("tabbar:images", vo);
 					stringTemplate.setObject("images:"+vo.getId(), vo, 0);

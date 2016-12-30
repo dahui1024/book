@@ -30,7 +30,7 @@
 			<c:choose>
 				<c:when test="${txt.next_sn > 0 }">
 					<a href="/" class="col-md-2 btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-home"></span>首页</a>
-					<a href="/txts/${txt.id }" class="col-md-8 btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-file"></span>下一章</a>
+					<a href="/txts/${txt.id }/${txt.next_sn }" class="col-md-8 btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-file"></span>下一章</a>
 					<a href="#" class="col-md-1 btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-arrow-up"></span>顶部</a>
 					<a href="javascript:history.go(-1)" class="col-md-1 btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-arrow-left"></span>返回</a>
 				</c:when>
