@@ -12,4 +12,9 @@ public class IndexController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/wisdoms/txt")
+	public String txt(Model model){
+		return "upload/txt";
+	}
+	
 }

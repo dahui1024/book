@@ -6,8 +6,10 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-@Entity(value = "txt", noClassnameStored = true)
-public class Txt {
+import com.midread.book.utils.CommonConstant;
+
+@Entity(value = "book", noClassnameStored = true)
+public class Book {
 
 	@Id
 	private ObjectId id;
@@ -20,6 +22,7 @@ public class Txt {
 	private String oss_url;
 	private Date upload_time;
 	private String provider;
+	private CommonConstant.STATUS status;
 
 	public ObjectId getId() {
 		return id;
@@ -99,6 +102,14 @@ public class Txt {
 
 	public void setProvider(String provider) {
 		this.provider = provider;
+	}
+
+	public CommonConstant.STATUS getStatus() {
+		return status;
+	}
+
+	public void setStatus(CommonConstant.STATUS status) {
+		this.status = status;
 	}
 
 }

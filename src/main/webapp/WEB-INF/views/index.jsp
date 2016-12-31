@@ -40,8 +40,8 @@
               <ul class="nav masthead-nav">
                 <li class="active"><a href="/">首页</a></li>
                 <li><a href="/images">图集</a></li>
-                <li><a href="/txts">文集</a></li>
-                <li><a href="/input.html">去分享</a></li>
+                <li><a href="/books">文集</a></li>
+                <li><a href="/wisdoms/txt">去分享</a></li>
               </ul>
             </div>
           </div>
