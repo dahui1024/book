@@ -41,7 +41,8 @@
 				<div class="form-group col-md-12">
 					<label for="labels">标签</label>
 					<div class="checkbox">
-						<label><input type="checkbox" name="labels" value="文学">文学</label>
+						<label><input type="checkbox" name="labels" value="小说">小说</label>
+						<label><input type="checkbox" name="labels" value="论说">论说</label>
 					</div>
 				</div>
 				<div class="form-group col-md-12">

@@ -39,7 +39,7 @@
               <h3 class="masthead-brand">中场分享</h3>
               <ul class="nav masthead-nav">
                 <li class="active"><a href="/">首页</a></li>
-                <li><a href="/images">图集</a></li>
+                <!-- <li><a href="/images">图集</a></li> -->
                 <li><a href="/books">文集</a></li>
                 <li><a href="/wisdoms/txt">去分享</a></li>
               </ul>
@@ -51,7 +51,7 @@
             <p class="lead">留住经典，分享经典。</p>
             <p class="lead">
 				<a href="/txts" class="btn btn-lg btn-default">经典文集</a>
-				<a href="/images" class="btn btn-lg btn-default">经典图集</a>
+				<!-- <a href="/images" class="btn btn-lg btn-default">经典图集</a> -->
             </p>
           </div>
 

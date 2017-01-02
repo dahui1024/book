@@ -46,13 +46,13 @@ dt {
 				</dd>
 			</dl>
 		</c:forEach>
-		<nav>
+		<nav class="navbar-fixed-bottom">
 			<ul class="pager">
 				<li><a href="/"><span class="glyphicon glyphicon-home"></span>首页</a></li>
 				<c:if test="${!empty page }">
 					<li><a href="/books?page=${page }"><span class="glyphicon glyphicon-list-alt"></span>下一页</a></li>
 				</c:if>
-				<li><a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-arrow-left"></span>返回</a></li>
+				<li><a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span>返回</a></li>
 			</ul>
 		</nav>
 	</div>

@@ -17,6 +17,7 @@
 <style type="text/css">
 p {
 	color: #262626;
+	cursor: pointer;
 }
 </style>
 
@@ -27,6 +28,11 @@ p {
 	<div class="container" id="#">
 		<div class="page-header">
 			<h3>${chapter.title }<small>${chapter.summary }</small></h3>
+		</div>
+		<div id="toolbar" class="col-md-12 well">
+			<div class="checkbox">
+				<label><input type="checkbox" name="hide_audio" id="hide_audio" value="隐藏语音" onchange="hideAudio(this)">隐藏语音</label>
+			</div>
 		</div>
 		<div id="content" class="col-md-12"></div>
 		<div class="col-md-12">
@@ -65,14 +71,14 @@ p {
 			<hr>
 		</div>
 		
-		<nav>
+		<nav class="navbar-fixed-bottom">
 			<ul class="pager">
-				<li><a href="/"><span class="glyphicon glyphicon-home"></span>首页</a></li>
+				<li><a href="#comments"><span class="glyphicon glyphicon-comment"></span>评论区</a></li>
 				<c:if test="${!empty chapter }">
-					<li><a href="/books/${chapter.book_id }/${chapter.sn+1 }"><span class="glyphicon glyphicon-list-alt"></span>下一章</a></li>
+					<li><a href="/books/${chapter.book_id }/${chapter.sn+1 }"><span class="glyphicon glyphicon-book"></span>下一章</a></li>
 				</c:if>
-				<li><a href="#"><span class="glyphicon glyphicon-arrow-up"></span>顶部</a></li>
-				<li><a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-arrow-left"></span>返回</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-chevron-up"></span>顶部</a></li>
+				<li><a href="javascript:history.go(-1)"><span class="glyphicon glyphicon-chevron-left"></span>返回</a></li>
 			</ul>
 		</nav>
 		
@@ -82,36 +88,84 @@ p {
 	<%@ include file="../../../html/js.html"%>
 	<script type="text/javascript">
 		//https://file.oss.bbcow.com
-		getTxt = function() {
-			$.ajax({
-				url : 'http://oikrsbhcw.bkt.clouddn.com/txt/${chapter.book_id }/${chapter.sn }.txt',
-				success : function(data) {
-					var arr = data.split("\n");
-					var num = 1;
-					for(var i=0; i<arr.length;i++){
-						if(arr[i] != ""){
-							$("#content").append("<p class='lead' id='c"+i+"'><var><font color='red'>"+num+"   </font></var>"+arr[i]+"</p>");
-							$("#content").append(audio(i));
-							
-							num++;
-						}
+		//http://oikrsbhcw.bkt.clouddn.com
+		var storage = window.localStorage;
+		var isHideAudio = storage.getItem("isHideAudio");
+		loadContent = function() {
+			// 读取内容本地存储 
+			if (storage.getItem("${chapter.id}")){
+				showData(storage.getItem("${chapter.id}"));
+			}else{
+				$.ajax({
+					url : 'https://file.oss.bbcow.com/txt/${chapter.book_id }/${chapter.sn }.txt',
+					success : function(data) {
+						storage.setItem("${chapter.id}", data);
+						
+						showData(data);
 					}
-				}
-			});
+				});
+			}
+			// 滑动标签处
+			if (storage.getItem("${chapter.id}.bookmark")){
+				var index = storage.getItem("${chapter.id}.bookmark");
+				location.href="#c"+index;
+				
+				$("#c"+index+"").append('<span class="glyphicon glyphicon-bookmark" style="color:blue"></span>');
+			}
+			if(isHideAudio == "true"){
+				$("#hide_audio").attr("checked","checked");
+			}
 		}
-		getTxt();
+		loadContent();
 		
+		function addBookmark(num){
+			storage.setItem("${chapter.id}.bookmark", num);
+			$("#c"+num+"").append('<span class="glyphicon glyphicon-bookmark" style="color:blue"></span>');
+		}
+		
+		function showData(data){
+			var arr = data.split("\n");
+			var num = 1;
+			for(var i=0; i<arr.length;i++){
+				if(arr[i] != ""){
+					$("#content").append("<p onclick='addBookmark("+num+")' class='lead' id='c"+num+"'><var><font color='red'>"+num+"   </font></var>"+arr[i]+"</p>");
+					
+					$("#content").append(audio(num));
+					
+					num++;
+				}
+			}
+		}
+		function hideAudio(obj){
+			if ($(obj).attr('checked') == undefined) {
+				$(".audio").hide();
+				$(obj).attr("checked","checked");
+				
+				storage.setItem("isHideAudio", true);
+			} else {
+				$(".audio").show();
+				$(obj).removeAttr("checked");
+				storage.setItem("isHideAudio", false);
+			}
+			
+		}
 		
 		function audio(num) {
 			var text = $("#c" + num + "").text();
 			if(text != null){
-				text = text.replace((num+1), "")
+				text = text.replace((num), "")
 			}
+			
 			var x = document.createElement("AUDIO");
 			x.setAttribute("preload", "none");
 			x.setAttribute("src", "http://tsn.baidu.com/text2audio?tex="+text+"&lan=zh&tok=${token }&ctp=1&cuid=${ip}");
 			x.setAttribute("controls", "controls");
 			x.setAttribute("class", "audio");
+			
+			if (isHideAudio == "true"){
+				$(x).css("display","none");
+			}
+			
 			return x;
 		}
 	</script>
