@@ -48,6 +48,10 @@
 			</div>
 		</c:forEach>
 
+		<footer class="col-md-12 text-center">
+			<p>@2016 中场分享, Power by <a  href="mailto:dahui@midread.com">@dahui</a>.</p>
+		</footer>
+
 		<nav class="navbar-fixed-bottom">
 			<ul class="pager">
 				<li><a href="/"><span class="glyphicon glyphicon-home"></span>首页</a></li>
