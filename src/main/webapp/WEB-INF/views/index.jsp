@@ -50,7 +50,7 @@
             <h1 class="cover-heading">中场分享。</h1>
             <p class="lead">留住经典，分享经典。</p>
             <p class="lead">
-				<a href="/txts" class="btn btn-lg btn-default">经典文集</a>
+				<a href="/books" class="btn btn-lg btn-default">经典文集</a>
 				<!-- <a href="/images" class="btn btn-lg btn-default">经典图集</a> -->
             </p>
           </div>
