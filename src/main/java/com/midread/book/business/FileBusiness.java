@@ -14,8 +14,11 @@ import org.springframework.stereotype.Component;
 import com.google.common.io.LineReader;
 import com.midread.book.db.entity.Book;
 import com.midread.book.db.entity.Chapter;
+import com.midread.book.db.entity.Essay;
 import com.midread.book.db.service.BookService;
 import com.midread.book.db.service.ChapterService;
+import com.midread.book.db.service.EssayService;
+import com.midread.book.form.EssayForm;
 import com.midread.book.form.FileForm;
 import com.midread.book.form.TxtForm;
 import com.midread.book.redis.StringTemplate;
@@ -37,6 +40,8 @@ public class FileBusiness {
 	BookService bookService;
 	@Autowired
 	ChapterService chapterService;
+	@Autowired
+	EssayService essayService;
 	
 	public void uploadTxt(TxtForm form){
 		if (!StringUtils.equals(CommonConstant.INVATION_CODE, form.getInvitation_code())) {
@@ -119,7 +124,35 @@ public class FileBusiness {
 		}
 	}
 	
-	
+	public void uploadEssay(EssayForm form){
+		if (StringUtils.isBlank(form.getName()) || StringUtils.isBlank(form.getContent()) || StringUtils.isBlank(form.getDescription())) {
+			return;
+		}
+		
+		Essay essay = new Essay();
+		essay.setContent(StringUtils.trim(form.getContent()));
+		essay.setDescription(StringUtils.trim(form.getDescription()));
+		essay.setName(StringUtils.trim(form.getName()));
+		if (StringUtils.isNotBlank(form.getPassword())) {
+			essay.setPassword(MD5Util.digest(CommonConstant.SALT+form.getPassword()));
+		}
+		essay.setUpload_time(new Date());
+		essay.setStatus(STATUS.enable);
+		
+		essayService.save(essay);
+		
+		String oss_url = "essay/" + essay.getId().toString() + ".txt";
+		try {
+			// OSS存储
+			if (StringUtils.isNotBlank(form.getPassword())) {
+				oss_url = "essay/" + essay.getId().toString() + "/" + essay.getPassword() + ".txt";
+			}
+			qiniuUtil.upload(oss_url, essay.getContent().getBytes("utf-8"));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public String upload(FileForm form){

@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <link rel="icon" href="/favicon.ico">
 
-<title>${chapter.title } | 中场分享</title>
+<title>${essay.name } | 中场分享</title>
 
 <%@ include file="../../../html/css.html"%>
 <style type="text/css">
@@ -27,15 +27,27 @@ p {
 
 	<div class="container" id="#">
 		<div class="page-header">
-			<h3>${chapter.title }<small>${chapter.summary }</small></h3>
+			<h3>${essay.name }<small>${essay.description }</small></h3>
 		</div>
-		<div id="toolbar" class="col-md-12 well">
+		<div id="toolbar" class="col-md-12 well" style="display: none;">
 			<div class="checkbox">
 				<label><input type="checkbox" name="hide_audio" id="hide_audio" value="隐藏语音" onchange="hideAudio(this)">隐藏语音</label>
 			</div>
 		</div>
+		<div id="valid" class="col-md-12 well">
+			<form role="form form-inline" action="upload_essay" method="post">
+				<div class="row">
+					<div class="form-group col-md-8">
+						<input type="password" class="form-control input-md" id="password" name="password" placeholder="如需保密，请输入秘钥">
+					</div>
+					<div class="form-group col-md-4">
+					<button type="button" class="btn btn-danger btn-md btn-block" onclick="checkPassword()">校验</button>
+				</div>
+				</div>
+			</form>
+		</div>
 		<div id="content" class="col-md-12">
-			<div class="progress">
+			<div class="progress" style="display: none;">
 				<div id="progress_bar" class="progress-bar" aria-valuemin="10" aria-valuemax="100">
 					
 				</div>
@@ -99,42 +111,35 @@ p {
 		var storage = window.localStorage;
 		var isHideAudio = storage.getItem("isHideAudio");
 		
-		loadContent = function() {
+		function checkPassword(){
+			var pass = $("#password").val();	
+		
 			$.ajax({
-				url : 'https://file.oss.bbcow.com/txt/${chapter.book_id }/${chapter.sn }.txt',
+				method : "POST",	
+				data : {password : pass},
+				url : '/essays/ajax/check/${essay.id}',
+				success : function(data) {
+					if(data == "error"){
+						alert("校验失败");
+					}else{
+						$("#valid").hide();
+						$("#toolbar").show();
+						loadContent("https://file.oss.bbcow.com/essay/${essay.id }/"+data+".txt");
+					}
+				}
+			});
+		}
+		
+		loadContent = function(url) {
+			$.ajax({
+				url : url,
 				success : function(data) {
 					showData(data);
 				}
 			});
-			// 读取内容本地存储 
-			/* if (storage.getItem("${chapter.id}")){
-				showData(storage.getItem("${chapter.id}"));
-			}else{
-				$.ajax({
-					url : 'https://file.oss.bbcow.com/txt/${chapter.book_id }/${chapter.sn }.txt',
-					success : function(data) {
-						storage.setItem("${chapter.id}", data);
-						
-						showData(data);
-					}
-				});
-			} */
-			// 滑动标签处
-			if (storage.getItem("${chapter.id}.bookmark")){
-				var index = storage.getItem("${chapter.id}.bookmark");
-				location.href="#c"+index;
-				
-				$("#c"+index+"").append('<span class="glyphicon glyphicon-bookmark" style="color:blue"></span>');
-			}
 			if(isHideAudio == "true"){
 				$("#hide_audio").attr("checked","checked");
 			}
-		}
-		loadContent();
-		
-		function addBookmark(num){
-			storage.setItem("${chapter.id}.bookmark", num);
-			$("#c"+num+"").append('<span class="glyphicon glyphicon-bookmark" style="color:blue"></span>');
 		}
 		
 		function showData(data){
@@ -143,7 +148,7 @@ p {
 			var num = 1;
 			for(var i=0; i < len;i++){
 				if(arr[i] != ""){
-					$("#content").append("<p onclick='addBookmark("+num+")' class='lead' id='c"+num+"'><var><font color='red'>"+num+"   </font></var>"+arr[i]+"</p>");
+					$("#content").append("<p class='lead' id='c"+num+"'><var><font color='red'>"+num+"   </font></var>"+arr[i]+"</p>");
 					
 					$("#content").append(audio(num));
 					

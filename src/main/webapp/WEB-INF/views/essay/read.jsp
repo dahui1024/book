@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <link rel="icon" href="/favicon.ico">
 
-<title>${chapter.title } | 中场分享</title>
+<title>${essay.name } | 中场分享</title>
 
 <%@ include file="../../../html/css.html"%>
 <style type="text/css">
@@ -27,7 +27,7 @@ p {
 
 	<div class="container" id="#">
 		<div class="page-header">
-			<h3>${chapter.title }<small>${chapter.summary }</small></h3>
+			<h3>${essay.name }<small>${essay.description }</small></h3>
 		</div>
 		<div id="toolbar" class="col-md-12 well">
 			<div class="checkbox">
@@ -101,24 +101,11 @@ p {
 		
 		loadContent = function() {
 			$.ajax({
-				url : 'https://file.oss.bbcow.com/txt/${chapter.book_id }/${chapter.sn }.txt',
+				url : 'https://file.oss.bbcow.com/essay/${essay.id }.txt',
 				success : function(data) {
 					showData(data);
 				}
 			});
-			// 读取内容本地存储 
-			/* if (storage.getItem("${chapter.id}")){
-				showData(storage.getItem("${chapter.id}"));
-			}else{
-				$.ajax({
-					url : 'https://file.oss.bbcow.com/txt/${chapter.book_id }/${chapter.sn }.txt',
-					success : function(data) {
-						storage.setItem("${chapter.id}", data);
-						
-						showData(data);
-					}
-				});
-			} */
 			// 滑动标签处
 			if (storage.getItem("${chapter.id}.bookmark")){
 				var index = storage.getItem("${chapter.id}.bookmark");

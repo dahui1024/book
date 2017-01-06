@@ -16,5 +16,9 @@ public class IndexController {
 	public String txt(Model model){
 		return "upload/txt";
 	}
+	@RequestMapping(value="/wisdoms/essay")
+	public String essay(Model model){
+		return "upload/essay";
+	}
 	
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.midread.book.business.FileBusiness;
+import com.midread.book.form.EssayForm;
 import com.midread.book.form.FileForm;
 import com.midread.book.form.TxtForm;
 
@@ -25,5 +26,10 @@ public class FileController {
 	public String uploadTxt(TxtForm form, HttpServletRequest request) {
 		fileBusiness.uploadTxt(form);
 		return "redirect:/books";
+	}
+	@RequestMapping(value = "/wisdoms/upload_essay", method = RequestMethod.POST)
+	public String uploadEssay(EssayForm form, HttpServletRequest request) {
+		fileBusiness.uploadEssay(form);
+		return "redirect:/essays";
 	}
 }
