@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.midread.book.db.dao.EssayDAO;
+import com.midread.book.db.entity.Comment;
 import com.midread.book.db.entity.Essay;
 
 @Component
@@ -33,5 +35,14 @@ public class EssayService {
 	
 	public Essay getById(ObjectId id){
 		return essayDAO.get(id);
+	}
+	
+	public void addComment(ObjectId id, Comment comment){
+		Query<Essay> query = essayDAO.createQuery().field("_id").equal(id);
+		
+		UpdateOperations<Essay> ops = essayDAO.createUpdateOperations();
+		ops.add("comments", comment);
+		
+		essayDAO.update(query, ops);
 	}
 }

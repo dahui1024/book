@@ -14,12 +14,6 @@
 <title>${essay.name } | 中场分享</title>
 
 <%@ include file="../../../html/css.html"%>
-<style type="text/css">
-p {
-	color: #262626;
-	cursor: pointer;
-}
-</style>
 
 </head>
 
@@ -45,7 +39,7 @@ p {
 		<div class="col-md-12">
 			<hr>
 			<h3>想法</h3>
-			<form role="form" action="/chapter/comments#comments" method="post">
+			<form role="form" action="" method="post">
 				<div class="form-group col-md-12">
 					<textarea class="form-control" rows="3" id="remark" name="remark" placeholder="有想法，就毫不吝啬的表达出来吧。" required="required"></textarea>
 				</div>
@@ -53,15 +47,15 @@ p {
 					<input type="text" class="form-control input-md" id="invitation_code" name="invitation_code" placeholder="邀请码：****，目前全部开放" required="required">
 				</div>
 				<div class="form-group col-md-6">
-					<input type="hidden" value="${chapter.id }" name="id">
-					<button type="submit" class="btn btn-danger btn-md btn-block ">发表</button>
+					<input type="hidden" value="${essay.id }" name="id">
+					<button id="submit" type="button" onclick="publishComment('${essay.id }','/essay/comments')"  data-toggle="popover" data-trigger="click" data-placement="top" class="btn btn-danger btn-md btn-block ">发表</button>
 				</div>
 			</form>
 		</div>
 		<div id="comments" class="col-md-12">
-			<c:if test="${!empty chapter.comments}">
-				<c:forEach items="${chapter.comments }" var="comment" varStatus="s">
-					<div class="panel panel-default">
+			<c:if test="${!empty essay.comments}">
+				<c:forEach items="${essay.comments }" var="comment" varStatus="s">
+					<div class="panel panel-default ${comment.nickname }">
 						<div class="panel-heading">
 							${comment.nickname }
 							<var>发表于：<fmt:formatDate value="${comment.create_time }" pattern="yyyy-MM-dd hh:mm:ss"/> </var>
@@ -72,7 +66,7 @@ p {
 					</div>
 				</c:forEach>
 			</c:if>
-			<c:if test="${empty chapter.comments}">
+			<c:if test="${empty essay.comments}">
 				<p class="lead text-center">无</p>
 			</c:if>
 			<hr>
@@ -90,98 +84,13 @@ p {
 		</nav>
 		
 	</div>
-
+	
+	<%@ include file="../../../html/footer.html"%>
 
 	<%@ include file="../../../html/js.html"%>
+	<script type="text/javascript" src="/static/js/read.js"></script>
 	<script type="text/javascript">
-		//https://file.oss.bbcow.com
-		//http://oikrsbhcw.bkt.clouddn.com
-		var storage = window.localStorage;
-		var isHideAudio = storage.getItem("isHideAudio");
-		
-		loadContent = function() {
-			$.ajax({
-				url : 'https://file.oss.bbcow.com/essay/${essay.id }.txt',
-				success : function(data) {
-					showData(data);
-				}
-			});
-			// 滑动标签处
-			if (storage.getItem("${chapter.id}.bookmark")){
-				var index = storage.getItem("${chapter.id}.bookmark");
-				location.href="#c"+index;
-				
-				$("#c"+index+"").append('<span class="glyphicon glyphicon-bookmark" style="color:blue"></span>');
-			}
-			if(isHideAudio == "true"){
-				$("#hide_audio").attr("checked","checked");
-			}
-		}
-		loadContent();
-		
-		function addBookmark(num){
-			storage.setItem("${chapter.id}.bookmark", num);
-			$("#c"+num+"").append('<span class="glyphicon glyphicon-bookmark" style="color:blue"></span>');
-		}
-		
-		function showData(data){
-			var arr = data.split("\n");
-			var len = arr.length;
-			var num = 1;
-			for(var i=0; i < len;i++){
-				if(arr[i] != ""){
-					$("#content").append("<p onclick='addBookmark("+num+")' class='lead' id='c"+num+"'><var><font color='red'>"+num+"   </font></var>"+arr[i]+"</p>");
-					
-					$("#content").append(audio(num));
-					
-					progressBar(i/len*100);
-					num++;
-				}
-			}
-			progressBar(100);
-		}
-		function hideAudio(obj){
-			if ($(obj).attr('checked') == undefined) {
-				$(".audio").hide();
-				$(obj).attr("checked","checked");
-				
-				storage.setItem("isHideAudio", true);
-			} else {
-				$(".audio").show();
-				$(obj).removeAttr("checked");
-				storage.setItem("isHideAudio", false);
-			}
-			
-		}
-		
-		
-		function progressBar(percent){
-			$("#progress_bar").css("width" ,percent+"%");
-			$("#progress_bar").attr("aria-valuenow", percent);
-			$("#progress_bar").text(percent+"%");
-			if(percent == 100){
-				//$(".progress").hide();
-			}
-		}
-		
-		function audio(num) {
-			var text = $("#c" + num + "").text();
-			if(text != null){
-				text = text.replace((num), "")
-			}
-			
-			var x = document.createElement("AUDIO");
-			x.setAttribute("preload", "none");
-			x.setAttribute("src", "http://tsn.baidu.com/text2audio?tex="+text+"&lan=zh&tok=${token }&ctp=1&cuid=${ip}");
-			x.setAttribute("controls", "controls");
-			x.setAttribute("class", "audio");
-			
-			if (isHideAudio == "true"){
-				$(x).css("display","none");
-			}
-			
-			return x;
-		}
+		loadContent("essay/${essay.id }.txt","${chapter.id }", "${token}", "${ip}");
 	</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.midread.book.vo;
+package com.midread.book.controller.vo;
 
 import java.util.Date;
 

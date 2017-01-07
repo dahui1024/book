@@ -24,8 +24,8 @@
 			<h1>资源分享专区<small>好看、好玩</small></h1>
 		</div>
 
-		<div class="row">
-			<form role="form" action="upload_txt" method="post" enctype="multipart/form-data">
+		<form role="form" action="upload_txt" method="post" enctype="multipart/form-data">
+			<div class="row">
 				<div class="form-group col-md-12">
 					<label for="invitation_code">邀请码</label>
 					<input type="text" class="form-control input-md" id="invitation_code" name="invitation_code" placeholder="邀请码：****" required="required">
@@ -54,14 +54,17 @@
 					<input type="file" id="file" name="file" class="input-lg" required="required">
 					<p class="help-block">目前只支持TXT文档，禁止上传违法内容。</p>
 				</div>
-				<div class="form-group col-md-12">
-					<button type="submit" class="btn btn-danger btn-lg btn-block">上传</button>
-				</div>
-			</form>
-		</div>
+			</div>
+		
+			<nav class="navbar-fixed-bottom container">
+				<button type="submit" class="btn btn-danger btn-lg btn-block">发布</button>
+			</nav>
+		</form>
 
 	</div>
 	<!-- /container -->
+
+	<%@ include file="../../../html/footer.html"%>
 
 	<%@ include file="../../../html/js.html"%>
 	

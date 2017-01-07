@@ -1,22 +1,16 @@
 package com.midread.book.business;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.midread.book.db.entity.Book;
 import com.midread.book.db.entity.Chapter;
-import com.midread.book.db.service.BookService;
-import com.midread.book.db.service.ChapterService;
 
 @Component
-public class BookBusiness {
-	@Autowired
-	BookService bookService;
-	@Autowired
-	ChapterService chapterService;
+public class BookBusiness extends AbstractBusiness {
 	
 	public List<Book> getBooks(int page){
 		List<Book> book_list = bookService.getByPage(page);
@@ -26,10 +20,14 @@ public class BookBusiness {
 		return bookService.getById(new ObjectId(id));
 	}
 	public Chapter getChapter(String book_id, int sn){
-		return chapterService.getByBookAndSn(new ObjectId(book_id), sn);
+		Chapter chapter = chapterService.getByBookAndSn(new ObjectId(book_id), sn);
+		Collections.reverse(chapter.getComments());
+		return chapter;
 	}
 	public Chapter getChapterById(String id){
-		return chapterService.getById(new ObjectId(id));
+		Chapter chapter = chapterService.getById(new ObjectId(id));
+		Collections.reverse(chapter.getComments());
+		return chapter;
 	}
 	
 	public List<Chapter> getBookChapters(String id){

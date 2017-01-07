@@ -1,6 +1,7 @@
 package com.midread.book.db.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
@@ -16,8 +17,10 @@ public class Essay {
 	private String name;
 	private String description;
 	private String content;
+	private String contents;
 	private String password;
 	private String oss_url;
+	private List<Comment> comments;
 	private Date upload_time;
 	private CommonConstant.STATUS status;
 	public ObjectId getId() {
@@ -67,6 +70,18 @@ public class Essay {
 	}
 	public void setStatus(CommonConstant.STATUS status) {
 		this.status = status;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	public String getContents() {
+		return contents;
+	}
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 
 	

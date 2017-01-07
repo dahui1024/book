@@ -8,40 +8,25 @@ import java.util.List;
 
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.io.LineReader;
+import com.midread.book.controller.form.EssayForm;
+import com.midread.book.controller.form.FileForm;
+import com.midread.book.controller.form.TxtForm;
+import com.midread.book.controller.vo.ImageVo;
+import com.midread.book.controller.vo.TxtVo;
 import com.midread.book.db.entity.Book;
 import com.midread.book.db.entity.Chapter;
 import com.midread.book.db.entity.Essay;
-import com.midread.book.db.service.BookService;
-import com.midread.book.db.service.ChapterService;
-import com.midread.book.db.service.EssayService;
-import com.midread.book.form.EssayForm;
-import com.midread.book.form.FileForm;
-import com.midread.book.form.TxtForm;
-import com.midread.book.redis.StringTemplate;
+import com.midread.book.utils.AESUtils;
 import com.midread.book.utils.CommonConstant;
 import com.midread.book.utils.CommonConstant.STATUS;
 import com.midread.book.utils.MD5Util;
 import com.midread.book.utils.NameUtil;
-import com.midread.book.utils.QiniuUtil;
-import com.midread.book.vo.ImageVo;
-import com.midread.book.vo.TxtVo;
 
 @Component
-public class FileBusiness {
-	@Autowired
-	QiniuUtil qiniuUtil;
-	@Autowired
-	StringTemplate stringTemplate;
-	@Autowired
-	BookService bookService;
-	@Autowired
-	ChapterService chapterService;
-	@Autowired
-	EssayService essayService;
+public class FileBusiness extends AbstractBusiness {
 	
 	public void uploadTxt(TxtForm form){
 		if (!StringUtils.equals(CommonConstant.INVATION_CODE, form.getInvitation_code())) {
@@ -135,6 +120,14 @@ public class FileBusiness {
 		essay.setName(StringUtils.trim(form.getName()));
 		if (StringUtils.isNotBlank(form.getPassword())) {
 			essay.setPassword(MD5Util.digest(CommonConstant.SALT+form.getPassword()));
+			
+			String digest_16 = StringUtils.substring(essay.getPassword(), 8, 24);
+			
+			try {
+				essay.setContents(AESUtils.Encrypt(essay.getContent(), digest_16));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		essay.setUpload_time(new Date());
 		essay.setStatus(STATUS.enable);

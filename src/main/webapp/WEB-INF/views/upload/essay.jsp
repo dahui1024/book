@@ -50,13 +50,10 @@
 		</form>
 
 	</div>
-	
-	<footer class="col-md-12 text-center">
-		<p>@2016 中场分享, Power by <a  href="mailto:dahui@midread.com">@dahui</a>.</p>
-	</footer>
-	
 	<!-- /container -->
-
+	
+	<%@ include file="../../../html/footer.html"%>
+	
 	<%@ include file="../../../html/js.html"%>
 	
   </body>

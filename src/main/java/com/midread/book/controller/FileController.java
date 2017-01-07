@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.midread.book.business.FileBusiness;
-import com.midread.book.form.EssayForm;
-import com.midread.book.form.FileForm;
-import com.midread.book.form.TxtForm;
+import com.midread.book.controller.form.EssayForm;
+import com.midread.book.controller.form.FileForm;
+import com.midread.book.controller.form.TxtForm;
 
 @Controller("fileController")
 public class FileController {

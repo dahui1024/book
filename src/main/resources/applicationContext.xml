@@ -3,65 +3,29 @@
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd"
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
 	default-lazy-init="true">
 
 	<description>book</description>
 	
 	<util:properties id="config" location="classpath:applicationContext.properties"/> 
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.midread.book.interceptor.BookInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
-	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
-        <property name="maxTotal" value="20"></property>  
-        <property name="maxIdle" value="10"></property>  
-        <property name="minIdle" value="10"></property>  
-        <property name="maxWaitMillis" value="1000"></property>  
-        <property name="minEvictableIdleTimeMillis" value="5000"></property>  
-        <property name="timeBetweenEvictionRunsMillis" value="10000"></property>  
-    </bean>
-    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">  
-        <property name="poolConfig" ref="jedisPoolConfig"></property>  
-        <!-- <property name="hostName" value="r-2ze53092fa41d1e4.redis.rds.aliyuncs.com"></property>  
-        <property name="port" value="6379"></property> -->
-        <property name="password" value="Adan1990"></property>
-        <property name="hostName" value="123.57.183.56"></property>  
-        <property name="port" value="6380"></property>  
-        <property name="timeout" value="5000"></property>  
-        <property name="usePool" value="true"></property>  
-        <property name="database" value="0"></property>  
-    </bean>
-	
-	<!-- 使用工厂创建mongo实例 -->
-     <bean id="mongoClient" class="com.midread.book.db.MongoClientFactoryBean">
-		<property name="userName" value="adan"/>
-		<property name="password" value="Adan1990"/>
-		<property name="dataBaseName" value="box"/>
-		<property name="host" value="123.57.183.56"/>
-		<property name="port" value="26016"/>
-		<property name="connectTimeout" value="1000"/>
-     </bean>
-     <!-- 使用工厂创建morphia实例，同时完成类映射操作 -->
-     <bean id="morphia" class="com.midread.book.db.MorphiaFactoryBean" >
-         <property name="mapPackages">
-             <array>
-                 <value>com.midread.book.db.entity</value>
-             </array>
-         </property>
-     </bean>
-     <!-- 使用工厂创建datastore，同时完成index和caps的确认操作 -->
-     <bean id="datastore" class="com.midread.book.db.DatastoreFactoryBean" >
-         <property name="morphia" ref="morphia"/>
-         <property name="MongoClient" ref="mongoClient"/>
-         <property name="dbName" value="box"/>
-         <property name="toEnsureIndexes" value="true"/>
-         <property name="toEnsureCaps" value="true"/>
-     </bean>
-	
+	<import resource="applicationContext-redis.xml"/>
+	<import resource="applicationContext-mongo.xml"/>
 	
 </beans>

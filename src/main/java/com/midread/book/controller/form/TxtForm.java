@@ -1,4 +1,4 @@
-package com.midread.book.form;
+package com.midread.book.controller.form;
 
 import java.io.Serializable;
 

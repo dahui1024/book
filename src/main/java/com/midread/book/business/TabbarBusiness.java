@@ -2,24 +2,13 @@ package com.midread.book.business;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.midread.book.db.service.BookService;
-import com.midread.book.db.service.ChapterService;
-import com.midread.book.redis.StringTemplate;
-import com.midread.book.vo.ImageVo;
-import com.midread.book.vo.TxtVo;
+import com.midread.book.controller.vo.ImageVo;
+import com.midread.book.controller.vo.TxtVo;
 
 @Component
-public class TabbarBusiness {
-	@Autowired
-	StringTemplate stringTemplate;
-	@Autowired
-	BookService bookService;
-	@Autowired
-	ChapterService chapterService;
-	
+public class TabbarBusiness extends AbstractBusiness {
 	public List<ImageVo> getImages(int page){
 		List<ImageVo> images = stringTemplate.getList("tabbar:images", ImageVo.class, (page-1)*10, 10);
 		
