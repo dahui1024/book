@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd"
+	default-lazy-init="true">
+
+	<description>book mongo</description>
+	
+	<!-- 使用工厂创建mongo实例 -->
+     <bean id="mongoClient" class="com.midread.book.db.MongoClientFactoryBean">
+		<property name="userName" value="adan"/>
+		<property name="password" value="Adan1990"/>
+		<property name="dataBaseName" value="box"/>
+		<property name="host" value="123.57.183.56"/>
+		<property name="port" value="26016"/>
+		<property name="connectTimeout" value="1000"/>
+     </bean>
+     <!-- 使用工厂创建morphia实例，同时完成类映射操作 -->
+     <bean id="morphia" class="com.midread.book.db.MorphiaFactoryBean" >
+         <property name="mapPackages">
+             <array>
+                 <value>com.midread.book.db.entity</value>
+             </array>
+         </property>
+     </bean>
+     <!-- 使用工厂创建datastore，同时完成index和caps的确认操作 -->
+     <bean id="datastore" class="com.midread.book.db.DatastoreFactoryBean" >
+         <property name="morphia" ref="morphia"/>
+         <property name="MongoClient" ref="mongoClient"/>
+         <property name="dbName" value="box"/>
+         <property name="toEnsureIndexes" value="true"/>
+         <property name="toEnsureCaps" value="true"/>
+     </bean>
+	
+</beans>
