@@ -1,8 +1,8 @@
 var storage = window.localStorage;
 var isHideAudio = storage.getItem("isHideAudio");
 
-// https://file.oss.bbcow.com/
-// http://oikrsbhcw.bkt.clouddn.com/
+var URI  = "https://file.oss.bbcow.com/";
+//var URI  = "http://oikrsbhcw.bkt.clouddn.com/";
 // 初始化阅读页
 function loadContent(resource_url, txt_id, audio_token, client_ip){
 	// 全站控制语音
@@ -11,7 +11,7 @@ function loadContent(resource_url, txt_id, audio_token, client_ip){
 	}
 	
 	$.ajax({
-		url : 'https://file.oss.bbcow.com/'+resource_url,
+		url : URI + resource_url,
 		success : function(data) {
 			// 文本转换html
 			toHtml(data, audio_token, client_ip);

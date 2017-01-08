@@ -47,6 +47,12 @@
 				<prop key="java.lang.Throwable">error/500</prop>
 			</props>
 		</property>
+		<property name="statusCodes">
+			<props>
+				<prop key="error/error">500</prop>
+				<prop key="error/404">404</prop>
+			</props>
+		</property>
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10000000" />

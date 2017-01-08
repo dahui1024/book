@@ -38,6 +38,9 @@
             <div class="inner">
               <h3 class="masthead-brand">中场分享</h3>
               <ul class="nav masthead-nav">
+                <li><a href="https://cse.google.com/cse/publicurl?cx=003576720495153379700:tvvagdlgrbq">
+                	<span class="glyphicon glyphicon-search"></span>
+                </a></li>
                 <li class="active"><a href="/">首页</a></li>
                 <li><a href="/wisdoms/txt">分享文集</a></li>
                 <li><a href="/wisdoms/essay">分享短文</a></li>
@@ -45,7 +48,7 @@
             </div>
           </div>
 
-          <div class="inner cover">
+		<div class="inner cover">
             <h1 class="cover-heading">中场分享。</h1>
             <p class="lead">留住经典，分享经典。</p>
             <p class="lead">

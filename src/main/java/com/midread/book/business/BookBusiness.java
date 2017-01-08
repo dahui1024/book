@@ -21,12 +21,16 @@ public class BookBusiness extends AbstractBusiness {
 	}
 	public Chapter getChapter(String book_id, int sn){
 		Chapter chapter = chapterService.getByBookAndSn(new ObjectId(book_id), sn);
-		Collections.reverse(chapter.getComments());
+		if(chapter.getComments()!=null){
+			Collections.reverse(chapter.getComments());
+		}
 		return chapter;
 	}
 	public Chapter getChapterById(String id){
 		Chapter chapter = chapterService.getById(new ObjectId(id));
-		Collections.reverse(chapter.getComments());
+		if(chapter.getComments()!=null){
+			Collections.reverse(chapter.getComments());
+		}
 		return chapter;
 	}
 	

@@ -47,7 +47,7 @@
 				</ul>
 			</div>
 		</c:forEach>
-
+		
 		<nav class="navbar-fixed-bottom">
 			<ul class="pager">
 				<li><a href="/"><span class="glyphicon glyphicon-home"></span>首页</a></li>
