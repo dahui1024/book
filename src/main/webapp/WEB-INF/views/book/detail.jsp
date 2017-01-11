@@ -6,11 +6,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="重温经典文学，分享经典文学。">
-<meta name="author" content="">
+<meta name="keywords" content="${book.description }">
+<meta name="description" content="${book.description }">
 <link rel="icon" href="/favicon.ico">
 
-<title>${book.name } | 中场分享</title>
+<title>${book.name } | 杂书网</title>
 
 <%@ include file="../../../html/css.html"%>
 <style type="text/css">

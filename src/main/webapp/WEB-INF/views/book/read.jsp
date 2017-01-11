@@ -7,11 +7,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="重温经典文学，分享经典文学。">
-<meta name="author" content="">
+<meta name="keywords" content="小说,小说网,杂书,原创网络文学,如何阅读一本书">
+<meta name="description" content="杂书网，免费小说、经典文集分享。">
 <link rel="icon" href="/favicon.ico">
 
-<title>${chapter.title } | 中场分享</title>
+<title>${chapter.title } | 杂书网</title>
 
 <%@ include file="../../../html/css.html"%>
 

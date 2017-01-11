@@ -5,11 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="重温经典文学，分享经典文学。">
-    <meta name="author" content="">
-    <link rel="icon" href="/favicon.ico">
+    <meta name="keywords" content="小说,小说网,杂书,原创网络文学,如何阅读一本书">
+    <meta name="description" content="杂书网，免费小说、经典文集分享。">
 
-    <title>中场分享</title>
+    <title>【杂书网】 - 免费小说、经典文集分享</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +35,7 @@
 
           <div class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">中场分享</h3>
+              <h3 class="masthead-brand">杂书网</h3>
               <ul class="nav masthead-nav">
                 <li><a href="https://cse.google.com/cse/publicurl?cx=003576720495153379700:tvvagdlgrbq">
                 	<span class="glyphicon glyphicon-search"></span>
@@ -49,8 +48,8 @@
           </div>
 
 		<div class="inner cover">
-            <h1 class="cover-heading">中场分享。</h1>
-            <p class="lead">留住经典，分享经典。</p>
+            <h1 class="cover-heading">杂书网。</h1>
+            <p class="lead">杂书网，免费小说、经典文集分享。</p>
             <p class="lead">
 				<a href="/books" class="btn btn-lg btn-default">经典文集</a>
 				<a href="/essays" class="btn btn-lg btn-default">短文</a>
@@ -60,7 +59,8 @@
 
           <div class="mastfoot">
             <div class="inner">
-              <p>@2016 中场分享, Power by <a  href="mailto:dahui@midread.com">@dahui</a>.</p>
+            	<p>Copyright©  杂书网  2016 - 2017 , All  Rights  Reserved  </p>
+				<p>Power by <a  href="mailto:dahui@midread.com">@dahui</a>.</p>
             </div>
           </div>
         </div>
