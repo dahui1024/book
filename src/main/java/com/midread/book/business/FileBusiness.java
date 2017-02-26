@@ -24,6 +24,7 @@ import com.midread.book.utils.CommonConstant;
 import com.midread.book.utils.CommonConstant.STATUS;
 import com.midread.book.utils.MD5Util;
 import com.midread.book.utils.NameUtil;
+import com.midread.book.utils.UnicodeReader;
 
 @Component
 public class FileBusiness extends AbstractBusiness {
@@ -50,12 +51,7 @@ public class FileBusiness extends AbstractBusiness {
 	    	InputStreamReader reader = null;
 	    	try {
 	    		bomIn = new BOMInputStream(form.getFile().getInputStream());
-	    		String charset = "utf-8";
-				if (bomIn.hasBOM()) {
-					charset = bomIn.getBOMCharsetName();
-				}
-				reader = new InputStreamReader(bomIn, charset);
-				LineReader lr = new LineReader(reader);
+				LineReader lr = new LineReader(new UnicodeReader(bomIn, "UTF-8"));
 				
 	    		String line = null;
 	    		Chapter chapter = new Chapter();
